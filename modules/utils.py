@@ -20,3 +20,15 @@ def StringToDate(string):
 
 def DateToString(date):
     return date.strftime("%d/%m/%Y")
+
+def ListFindIndex(lst, match, args = []):
+    i = 0
+    while i < len(lst):
+        if match(lst[i], i, *args):
+            return i
+        i += 1
+    return None
+
+def ListFind(lst, match, args = []):
+    idx = ListFindIndex(lst, match, args)
+    return lst[idx] if idx != None else None

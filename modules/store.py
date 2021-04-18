@@ -1,3 +1,5 @@
+from modules.utils import ListFind, ListFindIndex
+
 _data = {}
 
 def InitStore(data):
@@ -10,25 +12,12 @@ def GetCollection(name):
 
 def FindOne(collection, entryId):
     global _data
-
-    for entry in _data[collection]:
-        if entry['id'] == entryId:
-            return entry
-    return None
-
-def FindOneIndex(collection, entryId):
-    global _data
-
-    i = 0
-    while i < len(_data[collection]):
-        if _data[collection][i]['id'] == entryId:
-            return i
-    return None
+    return ListFind(_data[collection], match=lambda x, i, d: x['id'] == d, args=[entryId])
 
 def UpdateOne(collection, entryId, value):
     global _data
 
-    index = FindOneIndex(collection, entryId)
+    index = ListFindIndex(_data[collection], match=lambda x, i, d: x['id'] == d, args=[entryId])
 
     if index != None:
         _data[collection][index].update(value)
