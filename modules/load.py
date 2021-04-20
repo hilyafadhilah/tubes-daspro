@@ -1,12 +1,12 @@
 import os.path
 from modules.utils import SplitByChar, StringToDate
 
-def LoadAll(collections, dirname):
+def LoadAll(schema, dirname):
     data = {}
 
-    for collection in collections:
+    for collection in schema:
         fname = os.path.join(dirname, collection + '.csv')
-        data[collection] = ConvertLoadedData(collections[collection], LoadCsv(fname))
+        data[collection] = ConvertLoadedData(schema[collection], LoadCsv(fname))
 
     return data
 

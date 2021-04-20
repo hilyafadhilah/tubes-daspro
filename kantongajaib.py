@@ -1,15 +1,15 @@
-from modules.constants import collections, commands
-from modules.args import ParseArgs
+from modules.constants import collectionsSchema, routes
+from modules.args import ParseArgs, GetDirname
 from modules.load import LoadAll
 from modules.store import InitStore
+from modules.view import MatchRoute
 
-args = ParseArgs()
-dirname = args.dirname
-
-InitStore(LoadAll(collections, dirname))
+ParseArgs()
+InitStore(LoadAll(collectionsSchema, dirname=GetDirname()))
 
 while True:
     command = input('>>> ')
+    route = MatchRoute(routes, command)
 
-    if command in commands:
-        commands[command]()
+    if route != None:
+        route['func']()

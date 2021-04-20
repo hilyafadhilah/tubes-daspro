@@ -1,7 +1,17 @@
 import argparse
 
+_dirname = None
+
 def ParseArgs():
+    global _dirname
+
     # @TODO: Add description, help, and error mesesage
     parser = argparse.ArgumentParser(description='')
     parser.add_argument('dirname', help='')
-    return parser.parse_args()
+
+    args = parser.parse_args()
+    _dirname = args.dirname
+
+def GetDirname():
+    global _dirname
+    return _dirname

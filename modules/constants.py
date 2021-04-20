@@ -1,12 +1,24 @@
-import routes.history
+from routes import history
 
-commands = {
-    'riwayatambil': routes.history.ConsumableHistoryRoute,
-    'riwayatpinjam': routes.history.BorrowHistoryRoute,
-    'riwayatkembali': routes.history.ReturnHistoryRoute
-}
+routes = [
+    {
+        'cmd': 'riwayatambil',
+        'func': history.ConsumableHistoryRoute,
+        'roles': ['Admin']
+    },
+    {
+        'cmd': 'riwayatpinjam',
+        'func': history.BorrowHistoryRoute,
+        'roles': ['Admin']
+    },
+    {
+        'cmd': 'riwayatkembali',
+        'func': history.ReturnHistoryRoute,
+        'roles': ['Admin']
+    },
+]
 
-collections = {
+collectionsSchema = {
     'user': {
         'id': 'int',
         'username': 'string',
