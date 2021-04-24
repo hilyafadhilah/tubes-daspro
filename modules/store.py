@@ -1,4 +1,4 @@
-from modules.utils import ListFind, ListFindIndex
+from modules.utils import ListFind, ListFindIndex, ListFilter
 
 _data = {}
 
@@ -13,6 +13,17 @@ def GetCollection(name):
 def FindOne(collection, entryId):
     global _data
     return ListFind(_data[collection], match=lambda x, i, d: x['id'] == d, args=[entryId])
+
+def FindBy(collection, match):
+    global _data
+
+    def IsMatch(entry, idx):
+        for col in match:
+            if entry[col] != match[col]:
+                return False
+        return True
+
+    return ListFilter(_data[collection], match=IsMatch)
 
 def UpdateOne(collection, entryId, value):
     global _data
