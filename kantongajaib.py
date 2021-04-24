@@ -11,5 +11,5 @@ while True:
     command = input('>>> ')
     route = MatchRoute(routes, command)
 
-    if route != None:
+    if route is not None:
         route['func']()

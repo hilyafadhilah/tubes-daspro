@@ -30,7 +30,7 @@ def UpdateOne(collection, entryId, value):
 
     index = ListFindIndex(_data[collection], match=lambda x, i, d: x['id'] == d, args=[entryId])
 
-    if index != None:
+    if index is not None:
         _data[collection][index].update(value)
         return _data[collection][index]
 

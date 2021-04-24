@@ -31,7 +31,7 @@ def ListFindIndex(lst, match, args = []):
 
 def ListFind(lst, match, args = []):
     idx = ListFindIndex(lst, match, args)
-    return lst[idx] if idx != None else None
+    return lst[idx] if idx is not None else None
 
 def ListFilter(lst, match, args = []):
     result = []
