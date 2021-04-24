@@ -25,14 +25,14 @@ collectionsSchema = {
         'nama': 'string',
         'alamat': 'string',
         'password': 'string',
-        'role': 'string'
+        'role': ['Admin', 'User']
     },
     'gadget': {
         'id': 'string',
         'nama': 'string',
         'deskripsi': 'string',
         'jumlah': 'int',
-        'rarity': 'string',
+        'rarity': ['C', 'B', 'A', 'S'],
         'tahun_ditemukan': 'int'
     },
     'consumable': {
@@ -40,7 +40,7 @@ collectionsSchema = {
         'nama': 'string',
         'deskripsi': 'string',
         'jumlah': 'int',
-        'rarity': 'string'
+        'rarity': ['C', 'B', 'A', 'S']
     },
     'consumable_history': {
         'id': 'int',
@@ -54,12 +54,16 @@ collectionsSchema = {
         'id_peminjam': 'int',
         'id_gadget': 'string',
         'tanggal_peminjaman': 'date',
-        'jumlah': 'int'
+        'jumlah': 'int',
+        'is_returned': {
+            'T': True,
+            'F': False
+        }
     },
     'gadget_return_history': {
         'id': 'int',
-        'id_peminjam': 'int',
-        'id_gadget': 'string',
-        'tanggal_pengembalian': 'date'
+        'id_peminjaman': 'int',
+        'tanggal_pengembalian': 'date',
+        'jumlah': 'int'
     }
 }

@@ -24,7 +24,7 @@ def BorrowHistoryRoute():
 def ReturnHistoryRoute():
     AbstractHistoryRoute(
         collection='gadget_return_history',
-        sortColumn='tanggal_peminjaman',
+        sortColumn='tanggal_pengembalian',
         display=ShowReturnHistory
     )
 
@@ -53,12 +53,14 @@ def ShowBorrowHistory(history):
     )
 
 def ShowReturnHistory(history):
-    user = FindOne('user', history['id_peminjam'])
-    gadget = FindOne('gadget', history['id_gadget'])
+    borrow = FindOne('gadget_borrow_history', history['id_peminjaman'])
+    user = FindOne('user', borrow['id_peminjam'])
+    gadget = FindOne('gadget', borrow['id_gadget'])
 
     print(
         f"ID Pengembalian      : {history['id']}\n" +
         f"Nama Peminjam        : {user['nama']}\n" +
         f"Nama Gadget          : {gadget['nama']}\n" +
-        f"Tanggal Pengembalian : {DateToString(history['tanggal_pengembalian'])}\n"
+        f"Tanggal Pengembalian : {DateToString(history['tanggal_pengembalian'])}\n" +
+        f"Jumlah               : {history['jumlah']}\n"
     )
