@@ -7,6 +7,20 @@ def Confirm(msg):
     value = input(msg + ' (Y/N): ')
     return value in 'Yy'
 
+def PrintNumbered(entries, each = print, key = None):
+    maxSpace = len(str(len(entries)))
+
+    for i in range(len(entries)):
+        spacing = maxSpace - len(str(i + 1))
+        print(f"{' ' * spacing}{i + 1}. ", end='')
+
+        if callable(key):
+            value = key(entries[i])
+        else:
+            value = entries[i]
+
+        each(value)
+
 def ShowEachEntry(entries, display = print, displayArgs = {}, pageSize = 5):
     total = len(entries)
     start = 0

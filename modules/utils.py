@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 
 def SplitByChar(str, sep):
     result = []
@@ -15,8 +15,7 @@ def SplitByChar(str, sep):
     return result
 
 def StringToDate(string):
-    d, m, y = SplitByChar(string, '/')
-    return datetime.datetime(int(y), int(m), int(d))
+    return datetime.strptime(string, '%d/%m/%Y')
 
 def DateToString(date):
     return date.strftime("%d/%m/%Y")

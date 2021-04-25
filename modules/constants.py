@@ -1,4 +1,4 @@
-from routes import history
+from routes import history, borrow_gadget, return_gadget
 
 routes = [
     {
@@ -15,6 +15,16 @@ routes = [
         'cmd': 'riwayatkembali',
         'func': history.ReturnHistoryRoute,
         'roles': ['Admin']
+    },
+    {
+        'cmd': 'pinjam',
+        'func': borrow_gadget.BorrowGadgetRoute,
+        'roles': ['User']
+    },
+    {
+        'cmd': 'kembali',
+        'func': return_gadget.ReturnGadgetRoute,
+        'roles': ['User']
     },
 ]
 
