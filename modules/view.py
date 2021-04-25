@@ -7,10 +7,10 @@ def Confirm(msg):
     value = input(msg + ' (Y/N): ')
     return value in 'Yy'
 
-def ShowEachEntry(entries, display = print, displayArgs = {}, jump = 5):
+def ShowEachEntry(entries, display = print, displayArgs = {}, pageSize = 5):
     total = len(entries)
     start = 0
-    count = jump if jump <= total else total
+    count = pageSize if pageSize <= total else total
 
     showNext = True
 
@@ -27,7 +27,7 @@ def ShowEachEntry(entries, display = print, displayArgs = {}, jump = 5):
 
         start = start + count
 
-        if jump > (total - start):
+        if pageSize > (total - start):
             count = total - start
 
         if start >= total:

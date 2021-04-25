@@ -2,27 +2,27 @@ from modules.store import GetCollection, FindOne
 from modules.view import ShowEachEntry
 from modules.utils import DateToString
 
-def AbstractHistoryRoute(collection, sortColumn, display):
+def ShowHistoryList(collection, sortColumn, display):
     histories = GetCollection(collection)
     histories.sort(key=lambda k: k[sortColumn], reverse=True)
     ShowEachEntry(histories, display=display)
 
 def ConsumableHistoryRoute():
-    AbstractHistoryRoute(
+    ShowHistoryList(
         collection='consumable_history',
         sortColumn='tanggal_pengambilan',
         display=ShowConsumableHistory
     )
 
 def BorrowHistoryRoute():
-    AbstractHistoryRoute(
+    ShowHistoryList(
         collection='gadget_borrow_history',
         sortColumn='tanggal_peminjaman',
         display=ShowBorrowHistory
     )
 
 def ReturnHistoryRoute():
-    AbstractHistoryRoute(
+    ShowHistoryList(
         collection='gadget_return_history',
         sortColumn='tanggal_pengembalian',
         display=ShowReturnHistory

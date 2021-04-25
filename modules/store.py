@@ -14,12 +14,12 @@ def FindOne(collection, entryId):
     global _data
     return ListFind(_data[collection], match=lambda x, i, d: x['id'] == d, args=[entryId])
 
-def FindBy(collection, match):
+def FindBy(collection, criteria):
     global _data
 
     def IsMatch(entry, idx):
-        for col in match:
-            if entry[col] != match[col]:
+        for col in criteria:
+            if entry[col] != criteria[col]:
                 return False
         return True
 
