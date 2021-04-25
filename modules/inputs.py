@@ -1,5 +1,9 @@
 from modules.utils import StringToDate
 
+def Confirm(msg):
+    value = input(msg + ' (Y/N): ')
+    return value in 'Yy'
+
 def PromptLoop(msg, until, err = 'Invalid.', bag = False):
     while True:
         inp = input(msg)
