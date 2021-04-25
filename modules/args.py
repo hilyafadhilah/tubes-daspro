@@ -5,9 +5,8 @@ _dirname = None
 def ParseArgs():
     global _dirname
 
-    # @TODO: Add description, help, and error mesesage
-    parser = argparse.ArgumentParser(description='')
-    parser.add_argument('dirname', help='')
+    parser = argparse.ArgumentParser(description='Inventarisasi kantong ajaib Doremonangis',)
+    parser.add_argument('dirname', help='Path direktori tempat file data disimpan')
 
     args = parser.parse_args()
     _dirname = args.dirname
