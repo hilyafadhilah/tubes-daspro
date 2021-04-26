@@ -1,6 +1,6 @@
 from modules.store import FindOne, FindBy, UpdateOne, InsertOne
 from modules.inputs import PromptLoop, GetNumericValidator, InputQty, InputDate
-from modules.view import PrintNumbered
+from modules.view import PrintNumbered, GetItemName
 
 def ReturnGadgetRoute():
     userId = 1 # @TODO: get current user
@@ -24,9 +24,6 @@ def ReturnGadgetRoute():
 
     # 4. Update data store accordingly
 
-    gadget = FindOne('gadget', borrow['id_gadget'])
-    UpdateOne('gadget', borrow['id_gadget'], { 'jumlah': gadget['jumlah'] + qty })
-
     InsertOne('gadget_return_history', autoId=True, value={
         'id_peminjaman': borrow['id'],
         'tanggal_pengembalian': date,
@@ -37,9 +34,25 @@ def ReturnGadgetRoute():
         # Return all, this item is no longer in borrowed state by the user
         UpdateOne('gadget_borrow_history', borrow['id'], { 'is_returned': True })
 
+    gadget = FindOne('gadget', borrow['id_gadget'])
+
+    if gadget is not None:
+        UpdateOne('gadget', borrow['id_gadget'], { 'jumlah': gadget['jumlah'] + qty })
+    else:
+        # A deleted item is being returned
+        InsertOne('gadget', value={
+            'id': borrow['id_gadget'],
+            'jumlah': qty,
+            'nama': None,
+            'deskripsi': None,
+            'rarity': None,
+            'tahun_ditemukan': None
+        })
+
     # 5. Success
-    
-    print(f"Item {gadget['nama']} (x{qty}) berhasil dikembalikan.")
+
+    name = GetItemName(borrow['id_gadget'], gadget)
+    print(f"Item {name} (x{qty}) berhasil dikembalikan.")
 
 def InputBorrowIndex(count):
     # Input and validate borrow index
@@ -67,4 +80,7 @@ def GetUnreturnedQty(borrow):
 def ShowEachBorrow(borrow):
     # Display each borrow entry
     gadget = FindOne('gadget', borrow['id_gadget'])
-    print(f"{gadget['nama']} (x{GetUnreturnedQty(borrow)})")
+    name = GetItemName(borrow['id_gadget'], gadget)
+    unreturnedQty = GetUnreturnedQty(borrow)
+
+    print(f"{name} (x{unreturnedQty})")

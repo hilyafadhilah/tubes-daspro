@@ -1,5 +1,5 @@
 from modules.store import GetCollection, FindOne
-from modules.view import ShowEachEntry
+from modules.view import ShowEachEntry, GetItemName
 from modules.utils import DateToString
 
 def ShowHistoryList(collection, sortColumn, display):
@@ -28,39 +28,45 @@ def ReturnHistoryRoute():
         display=ShowReturnHistory
     )
 
-def ShowConsumableHistory(history):
+def ShowConsumableHistory(idx, history):
     user = FindOne('user', history['id_pengambil'])
     consumable = FindOne('consumable', history['id_consumable'])
+    itemName = GetItemName(history['id_consumable'], consumable)
 
     print(
+        f"[{idx + 1}]\n" +
         f"ID Pengambilan      : {history['id']}\n" +
         f"Nama Pengambil      : {user['nama']}\n" +
-        f"Nama Consumable     : {consumable['nama']}\n" +
+        f"Nama Consumable     : {itemName}\n" +
         f"Tanggal Pengambilan : {DateToString(history['tanggal_pengambilan'])}\n" +
         f"Jumlah              : {history['jumlah']}\n"
     )
 
-def ShowBorrowHistory(history):
+def ShowBorrowHistory(idx, history):
     user = FindOne('user', history['id_peminjam'])
     gadget = FindOne('gadget', history['id_gadget'])
+    itemName = GetItemName(history['id_gadget'], gadget)
 
     print(
+        f"[{idx + 1}]\n" +
         f"ID Peminjaman      : {history['id']}\n" +
         f"Nama Peminjam      : {user['nama']}\n" +
-        f"Nama Gadget        : {gadget['nama']}\n" +
+        f"Nama Gadget        : {itemName}\n" +
         f"Tanggal Peminjaman : {DateToString(history['tanggal_peminjaman'])}\n" +
         f"Jumlah             : {history['jumlah']}\n"
     )
 
-def ShowReturnHistory(history):
+def ShowReturnHistory(idx, history):
     borrow = FindOne('gadget_borrow_history', history['id_peminjaman'])
     user = FindOne('user', borrow['id_peminjam'])
     gadget = FindOne('gadget', borrow['id_gadget'])
+    itemName = GetItemName(history['id_gadget'], gadget)
 
     print(
+        f"[{idx + 1}]\n" +
         f"ID Pengembalian      : {history['id']}\n" +
         f"Nama Peminjam        : {user['nama']}\n" +
-        f"Nama Gadget          : {gadget['nama']}\n" +
+        f"Nama Gadget          : {itemName}\n" +
         f"Tanggal Pengembalian : {DateToString(history['tanggal_pengembalian'])}\n" +
         f"Jumlah               : {history['jumlah']}\n"
     )

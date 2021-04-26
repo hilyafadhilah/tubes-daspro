@@ -1,4 +1,17 @@
+import os
 from modules.inputs import Confirm
+
+def ClearScreen():
+    if os.name == 'nt':
+        _ = os.system('cls')
+    else:
+        _ = os.system('clear')
+
+def GetItemName(itemId, item):
+    if item is not None:
+        return item['nama']
+    else:
+        return f"[Deleted Item {itemId}]"
 
 def PrintNumbered(entries, each = print, key = None):
     maxSpace = len(str(len(entries)))
@@ -8,13 +21,11 @@ def PrintNumbered(entries, each = print, key = None):
         print(f"{' ' * spacing}{i + 1}. ", end='')
 
         if callable(key):
-            value = key(entries[i])
+            each(key(entries[i]))
         else:
-            value = entries[i]
+            each(entries[i])
 
-        each(value)
-
-def ShowEachEntry(entries, display = print, displayArgs = {}, pageSize = 5):
+def ShowEachEntry(entries, display = print, pageSize = 5):
     total = len(entries)
     start = 0
     count = pageSize if pageSize <= total else total
@@ -25,14 +36,14 @@ def ShowEachEntry(entries, display = print, displayArgs = {}, pageSize = 5):
         print('')
 
         for i in range(start, start + count):
-            display(entries[i], **displayArgs)
+            display(i, entries[i])
 
         if count == 1:
             print(f"Menampilkan entri {start + 1} dari {total}.")
         else:
             print(f"Menampilkan entri {start + 1} - {start + count} dari {total}.")
 
-        start = start + count
+        start += count
 
         if pageSize > (total - start):
             count = total - start

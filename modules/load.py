@@ -35,25 +35,26 @@ def ConvertLoadedData(columnTypes, data):
 
     for raw in data:
         row = {}
-        for col in columnTypes:
-            if columnTypes[col] == 'int':
-                row[col] = int(raw[col])
-            elif columnTypes[col] == 'float':
-                row[col] = float(raw[col])
-            elif columnTypes[col] == 'date':
-                row[col] = StringToDate(raw[col])
-            elif type(columnTypes[col]) == list:
-                if raw[col] in columnTypes[col]:
+        for col in raw:
+            if col in columnTypes:
+                if columnTypes[col] == 'int':
+                    row[col] = int(raw[col])
+                elif columnTypes[col] == 'float':
+                    row[col] = float(raw[col])
+                elif columnTypes[col] == 'date':
+                    row[col] = StringToDate(raw[col])
+                elif type(columnTypes[col]) == list:
+                    if raw[col] in columnTypes[col]:
+                        row[col] = raw[col]
+                    else:
+                        row[col] = None
+                elif type(columnTypes[col]) == dict:
+                    if raw[col] in columnTypes[col]:
+                        row[col] = columnTypes[col][raw[col]]
+                    else:
+                        row[col] = None
+                else:
                     row[col] = raw[col]
-                else:
-                    row[col] = None
-            elif type(columnTypes[col]) == dict:
-                if raw[col] in columnTypes[col]:
-                    row[col] = columnTypes[col][raw[col]]
-                else:
-                    row[col] = None
-            else:
-                row[col] = raw[col]
         result.append(row)
 
     return result
