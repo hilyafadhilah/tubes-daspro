@@ -1,8 +1,14 @@
 from modules.utils import StringToDate
 
 def Confirm(msg):
-    value = input(msg + ' (Y/N): ')
+    while True:
+        value = input(msg + ' (Y/N): ')
+        if (value in "Yy") or (value in "Nn"):
+            break
+        else:
+            value = input(msg + ' (Y/N): ')
     return value in 'Yy'
+
 
 def PromptLoop(msg, until, err = 'Invalid.', bag = False):
     while True:

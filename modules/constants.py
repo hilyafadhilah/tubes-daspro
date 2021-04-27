@@ -1,4 +1,4 @@
-from routes import history, borrow_gadget, return_gadget
+from routes import history, return_gadget, borrow_gadget, save, exit, help
 
 routes = [
     {
@@ -26,6 +26,21 @@ routes = [
         'func': return_gadget.ReturnGadgetRoute,
         'roles': ['User']
     },
+    {
+        'cmd' : 'save',
+        'func' : save.Save,
+        'roles' : ['Admin', 'User']
+    },
+    {
+        'cmd' : 'help',
+        'func' : help.DisplayHelp,
+        'roles' : ['Admin', 'User']
+    },
+    {
+        'cmd': 'exit',
+        'func': exit.exit,
+        'roles': ['Admin']
+    }
 ]
 
 collectionsSchema = {

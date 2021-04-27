@@ -16,3 +16,5 @@ while True:
 
     if route is not None:
         route['func']()
+        if command == "exit":
+            break
