@@ -12,18 +12,13 @@ def MakeFolder(folder, path):
     os.makedirs(path + "\\" + folder)
 
 def RemakeFile(data, folder, path):
-    for i in (data.keys()):
-        key = []
-        file = open(path + "\\" + folder + "\\" + i + ".csv", 'w')
-        for j in (data[i][1]).keys():
-            key.append(j)
-        file.write(';'. join(key))
+    for name in (data):
+        file = open(os.path.join(path, folder, name) + ".csv", 'w')
+        fields = collectionsSchema[name].keys()
+        file.write(';'.join(fields))
         file.write('\n')
-        for k in (data[i]):
-            line = [] 
-            for l in (k.values()):
-                line.append(str(l))
-            file.write(';'. join(line))
-            file.write('\n')
+        for row in data[name]:
+            line = list(map(lambda f: str(row[f]), fields))
+        file.write(';'. join(line))
+        file.write('\n')
         file.close()
-
