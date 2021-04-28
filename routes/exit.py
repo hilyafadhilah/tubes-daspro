@@ -1,8 +1,8 @@
 from modules.view import Confirm
-from routes.save import Save
+from routes.save import SaveRoute
 
-def exit():
-    msg = ("Apakah Anda mau melakukan penyimpanan file yang sudah diubah?")
+def ExitRoute():
+    msg = "Apakah Anda mau melakukan penyimpanan file yang sudah diubah?"
     if Confirm(msg):
-        Save()
+        SaveRoute()
     
