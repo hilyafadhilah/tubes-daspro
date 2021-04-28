@@ -1,7 +1,7 @@
 def DisplayHelp():
     access = input("Admin/User : ") #masih belum ada fungsi buat mencari role nya
     print("============= HELP ============")
-    if(access == "Admin"):
+    if access == "Admin" :
         print("""
         registrasi - untuk melakukan registrasi baru
         login - untuk melakukan login ke dalam sistem
@@ -17,7 +17,7 @@ def DisplayHelp():
         help - menampilkan panduan penggunaan sistem
         exit - keluar dari aplikasi
         """)
-    elif (access == "User"):
+    elif access == "User":
         print("""
         login - untuk melakukan login ke dalam sistem
         cariraritiy - untuk menampilkan gadget berdasarkan rarity
