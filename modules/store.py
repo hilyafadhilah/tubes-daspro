@@ -48,3 +48,7 @@ def InsertOne(collection, value, autoId = False):
 def NextInsertId(collection):
     global _data
     return max(_data[collection], key=lambda x: x['id'])['id'] + 1
+
+def TakeData():
+    global _data
+    return _data
