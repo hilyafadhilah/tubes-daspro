@@ -28,7 +28,7 @@ routes = [
     },
     {
         'cmd' : 'save',
-        'func' : save.Save,
+        'func' : save.SaveRoute,
         'roles' : ['Admin', 'User']
     },
     {
@@ -38,7 +38,7 @@ routes = [
     },
     {
         'cmd': 'exit',
-        'func': exit.exit,
+        'func': exit.ExitRoute,
         'roles': ['Admin']
     }
 ]
