@@ -1,4 +1,4 @@
-from routes import history, return_gadget, borrow_gadget, save, exit, help
+from routes import history, return_gadget, borrow_gadget, change_stock, consume save, exit, help
 
 routes = [
     {
@@ -25,6 +25,16 @@ routes = [
         'cmd': 'kembali',
         'func': return_gadget.ReturnGadgetRoute,
         'roles': ['User']
+    },
+    {
+        'cmd': 'minta',
+        'func': consume.RequestConsumableRoute,
+        'roles': ['User']
+    },
+    {
+        'cmd': 'ubahjumlah',
+        'func': change_stock.ChangeStockRoute,
+        'roles': ['Admin']
     },
     {
         'cmd' : 'save',
