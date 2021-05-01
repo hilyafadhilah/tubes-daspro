@@ -10,3 +10,4 @@ def Save():
         MakeFolder(save_folder, Path)
 
     RemakeFile(TakeData(), save_folder, Path)
+    print("Penyimpanan berhasil dilakukan")
