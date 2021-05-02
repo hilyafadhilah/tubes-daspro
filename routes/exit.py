@@ -1,6 +1,7 @@
 from modules.view import Confirm
 from modules.store import GetCurrentUser
 from routes.save import SaveRoute
+from modules.store import GetCurrentUser
 
 def ExitRoute():
     user = GetCurrentUser()
@@ -9,3 +10,5 @@ def ExitRoute():
         if Confirm(msg):
             SaveRoute()
     
+    print("Exiting...")
+    print("Terimakasih sudah menggunakan katong ajaib kami. Sampai jumpa lagi")

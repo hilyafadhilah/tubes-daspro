@@ -52,9 +52,3 @@ def Decrypt(msg, code):
         decrypt.append(code[hasil])
     
     return "".join(decrypt)
-
-
-# Cuma untuk mencontohkan
-message = input("Masukkan password : ")
-what = input("encrypt/decrypt : ") #nanti ga usah diinput, langsung beri nilai aja
-print(hashing(message, what))
