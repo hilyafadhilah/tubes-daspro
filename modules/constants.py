@@ -1,93 +1,3 @@
-from routes import user, cari, manage_item, history, return_gadget, borrow_gadget, change_stock, consume, save, exit, help, gacha
-
-routes = [
-    {
-        'cmd': 'register',
-        'func': user.RegisterRoute,
-        'roles': ['Admin']
-    },
-    {
-        'cmd': 'login',
-        'func': user.LoginRoute,
-        'roles': []
-    },
-    {
-        'cmd': 'carirarity',
-        'func': cari.CariRarityRoute,
-        'roles': ['Admin', 'User']
-    },
-    {
-        'cmd': 'caritahun',
-        'func': cari.CariTahunRoute,
-        'roles': ['Admin', 'User']
-    },
-    {
-        'cmd': 'tambahitem',
-        'func': manage_item.TambahItemRoute,
-        'roles': ['Admin']
-    },
-    {
-        'cmd': 'hapusitem',
-        'func': manage_item.HapusItemRoute,
-        'roles': ['Admin']
-    },
-    {
-        'cmd': 'riwayatambil',
-        'func': history.ConsumableHistoryRoute,
-        'roles': ['Admin']
-    },
-    {
-        'cmd': 'riwayatpinjam',
-        'func': history.BorrowHistoryRoute,
-        'roles': ['Admin']
-    },
-    {
-        'cmd': 'riwayatkembali',
-        'func': history.ReturnHistoryRoute,
-        'roles': ['Admin']
-    },
-    {
-        'cmd': 'pinjam',
-        'func': borrow_gadget.BorrowGadgetRoute,
-        'roles': ['User']
-    },
-    {
-        'cmd': 'kembali',
-        'func': return_gadget.ReturnGadgetRoute,
-        'roles': ['User']
-    },
-    {
-        'cmd': 'minta',
-        'func': consume.RequestConsumableRoute,
-        'roles': ['User']
-    },
-    {
-        'cmd': 'ubahjumlah',
-        'func': change_stock.ChangeStockRoute,
-        'roles': ['Admin']
-    },
-    {
-        'cmd' : 'save',
-        'func' : save.SaveRoute,
-        'roles' : ['Admin', 'User']
-    },
-    {
-        'cmd' : 'help',
-        'func' : help.DisplayHelp,
-        'roles' : ['Admin', 'User']
-    },
-    {
-        'cmd': 'exit',
-        'func': exit.ExitRoute,
-        'roles': ['Admin']
-    },
-    {
-        'cmd': 'gacha',
-        'func': gacha.GachaRoute,
-        'roles': ['User']
-    }
-]
-
 collectionsSchema = {
     'user': {
         'id': 'int',
@@ -133,4 +43,40 @@ collectionsSchema = {
         'tanggal_pengembalian': 'date',
         'jumlah': 'int'
     }
+}
+
+# GACHA
+
+baseGachaPoints = {
+    'C': 80,
+    'B': 50,
+    'A': 25,
+    'S': 10
+}
+
+pointsBoost = {
+    'C': {
+        'C': 0,
+        'B': 1,
+        'A': 0,
+        'S': 0
+    },
+    'B': {
+        'C': -1,
+        'B': 0,
+        'A': 1,
+        'S': 0
+    },
+    'A': {
+        'C': -2,
+        'B': -1,
+        'A': 0,
+        'S': 1
+    },
+    'S': {
+        'C': -3,
+        'B': -2,
+        'A': 0,
+        'S': 2
+    },
 }

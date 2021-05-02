@@ -12,11 +12,11 @@ def FindFolder(folder, path):
 def MakeFolder(folder, path):
     os.makedirs(path + "\\" + folder)
 
-def RemakeFile(data, folder, path):
+def RemakeFile(data, folder, path, schema):
     data = DateToStringCsv(data)
     for name in (data):
         file = open(os.path.join(path, folder, name) + ".csv", 'w')
-        fields = collectionsSchema[name].keys()
+        fields = schema[name].keys()
         file.write(';'.join(fields))
         file.write('\n')
         for row in data[name]:
@@ -35,7 +35,7 @@ def DateToStringCsv(data):
         elif schema == "gadget_return_history":
             atribut = "tanggal_pengembalian"
         
-        for DataWithDate in data[schema]:
-            data[schema][DataWithDate['id']][atribut] = DateToString(DataWithDate[atribut])
+        for i in range(len(data[schema])):
+            data[schema][i][atribut] = DateToString(data[schema][i][atribut])
     
     return data
