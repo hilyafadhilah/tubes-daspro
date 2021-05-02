@@ -23,9 +23,6 @@ def ChangeStockRoute():
             else:
                 print(f"Tidak ada barang yang ditambahkan. Stok sekarang : {item['jumlah']}")
 
-def ValidId(tipe, id):
-    return FindOne(tipe,id) is not None
-
 def BuangItem(tipe, item, qty):
     if int(item['jumlah']) + qty < 0:
         print(f"{qty} {item['nama']} gagal dibuang karena stok kurang. Stok sekarang: {item['jumlah']} (<{qty})")
