@@ -1,6 +1,36 @@
-from routes import history, return_gadget, borrow_gadget, change_stock, consume, save, exit, help
+from routes import user, cari, manage_item, history, return_gadget, borrow_gadget, change_stock, consume, save, exit, help, gacha
 
 routes = [
+    {
+        'cmd': 'register',
+        'func': user.RegisterRoute,
+        'roles': ['Admin']
+    },
+    {
+        'cmd': 'login',
+        'func': user.LoginRoute,
+        'roles': []
+    },
+    {
+        'cmd': 'carirarity',
+        'func': cari.CariRarityRoute,
+        'roles': ['Admin', 'User']
+    },
+    {
+        'cmd': 'caritahun',
+        'func': cari.CariTahunRoute,
+        'roles': ['Admin', 'User']
+    },
+    {
+        'cmd': 'tambahitem',
+        'func': manage_item.TambahItemRoute,
+        'roles': ['Admin']
+    },
+    {
+        'cmd': 'hapusitem',
+        'func': manage_item.HapusItemRoute,
+        'roles': ['Admin']
+    },
     {
         'cmd': 'riwayatambil',
         'func': history.ConsumableHistoryRoute,
