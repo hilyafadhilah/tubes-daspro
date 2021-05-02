@@ -32,7 +32,7 @@ def Welcome():
     PrintDelayed(" Masukkan command. Ketik 'help' untuk bantuan.\n")
 
 def Goodbye():
-    print("\n Selamat Tinggal!")
+    PrintHeader("Selamat Tinggal!", True)
     PrintBanner()
 
 def PrintHeader(title, delayed = False):

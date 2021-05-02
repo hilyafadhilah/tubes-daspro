@@ -11,4 +11,4 @@ def ExitRoute():
             SaveRoute()
     
     print("Exiting...")
-    print("Terimakasih sudah menggunakan katong ajaib kami. Sampai jumpa lagi")
+    print("Terimakasih sudah menggunakan katong ajaib kami. Sampai jumpa lagi.")
