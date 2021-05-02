@@ -1,5 +1,5 @@
 from modules.store import UpdateOne, InsertOne, FindOne, FindBy
-from modules.inputs import PromptLoop, InputDate, InputQty
+from modules.inputs import PromptLoop, InputDate, InputInt
 
 def RequestConsumableRoute():
     userId = int(input()) # Belum ada fungsi untuk menentukan user/admin
@@ -19,8 +19,8 @@ def RequestConsumableRoute():
 
     #Input dan validasi consumable quantity dan tanggal pengambilan
     
-    quantity = InputQty('permintaan', min = 1, max=consumable['jumlah'])
-    request_date = InputDate('permintaan')
+    quantity = InputInt('Jumlah permintaan: ', min = 1, max=consumable['jumlah'])
+    request_date = InputDate('Tanggal permintaan: ')
     
     # Update data
     

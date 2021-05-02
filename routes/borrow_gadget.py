@@ -1,5 +1,5 @@
 from modules.store import FindOne, FindBy, UpdateOne, InsertOne
-from modules.inputs import PromptLoop, InputDate, InputQty
+from modules.inputs import PromptLoop, InputDate, InputInt
 
 def BorrowGadgetRoute():
     userId = 1 # @TODO: get current user
@@ -19,8 +19,8 @@ def BorrowGadgetRoute():
 
     # 3. Input and validate item qty and date of borrowing
 
-    qty = InputQty('peminjaman', min=1, max=gadget['jumlah'])
-    date = InputDate('peminjaman')
+    qty = InputInt('Jumlah peminjaman: ', min=1, max=gadget['jumlah'])
+    date = InputDate('Tanggal peminjaman: ')
 
     # 4. Update data correspondingly
 

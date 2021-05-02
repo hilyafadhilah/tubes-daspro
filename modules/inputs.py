@@ -30,9 +30,9 @@ def PromptLoop(msg, until, err = 'Invalid.', bag = False):
     else:
         return inp
 
-def InputDate(name):
+def InputDate(prompt):
     _, value = PromptLoop(
-        msg=f'Tanggal {name}: ',
+        msg=prompt,
         until=ValidateDate,
         err='Tanggal tidak valid! Format: DD/MM/YYYY',
         bag=True
@@ -40,17 +40,15 @@ def InputDate(name):
 
     return value
 
-def InputQty(name, min, max):
+def InputInt(prompt, min, max):
     def ErrMsg(value, bag):
         if bag is None:
             print('Bukan angka yang valid!')
-        elif bag == 1:
-            print('Terlalu banyak!')
-        elif bag == -1:
-            print('Terlalu sedikit!')
+        else:
+            print(f'Angka harus di antara {min} - {max}.')
 
     _, value = PromptLoop(
-        msg=f'Jumlah {name}: ',
+        msg=prompt,
         until=GetNumericValidator(min, max),
         err=ErrMsg,
         bag=True

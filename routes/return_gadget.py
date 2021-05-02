@@ -1,5 +1,5 @@
 from modules.store import FindOne, FindBy, UpdateOne, InsertOne
-from modules.inputs import PromptLoop, GetNumericValidator, InputQty, InputDate
+from modules.inputs import PromptLoop, GetNumericValidator, InputInt, InputDate
 from modules.view import PrintNumbered, GetItemName
 
 def ReturnGadgetRoute():
@@ -19,8 +19,8 @@ def ReturnGadgetRoute():
     borrow = borrows[idx]
     maxReturnQty = GetUnreturnedQty(borrow)
 
-    qty = InputQty('pengembalian', min=1, max=maxReturnQty)
-    date = InputDate('pengembalian')
+    qty = InputInt('Jumlah pengembalian: ', min=1, max=maxReturnQty)
+    date = InputDate('Tanggal pengembalian: ')
 
     # 4. Update data store accordingly
 
