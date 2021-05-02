@@ -1,7 +1,5 @@
 #ALGORITMA
 #ifAdmin
-#isGadget belum mengvalidasi bila id sudah ada atau belum
-#hasil data belum diarahkan ke dalam file penyimpanan
 def isRarity(rarity):       #Fungsi menerima input char untuk menentukan bahwa input adalah valid dan sesuai kriteria.
     if (rarity == "C"):
         isValid = True
