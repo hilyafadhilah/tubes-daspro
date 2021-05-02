@@ -1,6 +1,6 @@
 import time
 import math
-from modules.constants import baseGachaPoints, pointsBoost
+from modules.gacha_constants import baseGachaPoints, pointsBoost
 from modules.utils import ListFilter
 
 def Random():
