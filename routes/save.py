@@ -7,11 +7,11 @@ from modules.save_mod import FindFolder, MakeFolder, RemakeFile
 from modules.store import TakeData
 
 def SaveRoute():
-    save_folder = input("Masukkan nama folder penyimpanan : ")
-    Path = os.getcwd()
+    saveFolder = input("Masukkan nama folder penyimpanan : ")
+    path = os.getcwd()
     print("\nSaving...")
-    if not FindFolder(save_folder, Path):
-        MakeFolder(save_folder, Path)
+    if not FindFolder(saveFolder, path):
+        MakeFolder(saveFolder, path)
 
-    RemakeFile(TakeData(), save_folder, Path, collectionsSchema)
+    RemakeFile(TakeData(), saveFolder, path, collectionsSchema)
     print("Penyimpanan berhasil dilakukan")

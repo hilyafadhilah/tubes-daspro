@@ -5,16 +5,16 @@ from modules.store import FindOne, FindBy, UpdateOne
 
 #Masih butuh fungsi untuk role nya juga
 def ChangeStockRoute():
-    item_id = input("Masukkan ID : ")
-    if item_id == '' or item_id[0] not in "CG":
+    itemId = input("Masukkan ID : ")
+    if itemId == '' or itemId[0] not in "CG":
         print("ID tidak valid")
     else:
-        if item_id[0] == 'C':
+        if itemId[0] == 'C':
             tipe = 'consumable'
         else:
             tipe = 'gadget'
         qty = int(input("Masukkan jumlah : "))
-        item = FindOne(tipe, item_id)
+        item = FindOne(tipe, itemId)
 
         if item is None:
             print("Tidak ada item dengan ID tersebut!")
