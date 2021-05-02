@@ -27,7 +27,7 @@ def BuangItem(tipe, item, qty):
     if int(item['jumlah']) + qty < 0:
         print(f"{qty} {item['nama']} gagal dibuang karena stok kurang. Stok sekarang: {item['jumlah']} (<{qty})")
     else :
-        newQty = item['jumlah'] - qty
+        newQty = item['jumlah'] + qty
         UpdateOne(tipe, item['id'], {'jumlah' : newQty})
         print(f"{qty} {item['nama']} berhasil dibuang. Stok sekarang : {newQty}")
 
