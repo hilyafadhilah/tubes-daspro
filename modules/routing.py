@@ -3,11 +3,9 @@ from modules.store import GetCurrentUser
 from modules.view import PrintHeader
 
 def AuthorizeRoute(route, user):
-    if user is None:
-        if len(route['roles']) == 0:
+    if len(route['roles']) == 0:
             return True
-    else:
-        if user['role'] in route['roles']:
+    if (user is not None) and (user['role'] in route['roles']):
             return True
     return False
 
