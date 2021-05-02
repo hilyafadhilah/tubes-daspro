@@ -4,7 +4,7 @@ from modules.load import LoadAll
 from modules.store import InitStore
 from modules.routing import Enroute
 from modules.view import ClearScreen, Welcome, Goodbye
-from routes.routes import routes
+from routes.routes import routesMapping
 
 try:
     ParseArgs()
@@ -15,7 +15,7 @@ try:
 
     while True:
             command = input('>>> ')
-            cont = Enroute(routes, command)
+            cont = Enroute(routesMapping, command)
 
             if cont is False:
                 Goodbye()

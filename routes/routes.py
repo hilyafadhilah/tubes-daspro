@@ -1,6 +1,6 @@
 from routes import user, cari, manage_item, history, return_gadget, borrow_gadget, change_stock, consume, save, exit, help, gacha
 
-routes = [
+routesMapping = [
     {
         'cmd': 'register',
         'func': user.RegisterRoute,
