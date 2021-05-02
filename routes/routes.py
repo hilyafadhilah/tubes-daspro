@@ -74,7 +74,7 @@ routes = [
     {
         'cmd' : 'help',
         'func' : help.DisplayHelp,
-        'roles' : ['Admin', 'User']
+        'roles' : []
     },
     {
         'cmd': 'exit',
