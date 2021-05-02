@@ -1,4 +1,5 @@
 import os
+from time import sleep
 from modules.inputs import Confirm
 
 def ClearScreen():
@@ -6,6 +7,41 @@ def ClearScreen():
         _ = os.system('cls')
     else:
         _ = os.system('clear')
+
+def PrintDelayed(*args):
+    sleep(1)
+    print(*args)
+
+def Welcome():
+    PrintDelayed(
+"""
+________________________________________________________________________________
+    _    _                                          __                          
+    /  ,'                                           / |        ,         ,   /  
+---/_.'------__----__--_/_----__----__----__-------/__|------------__-------/__-
+  /  \     /   ) /   ) /    /   ) /   ) /   )     /   |      /   /   ) /   /   )
+_/____\___(___(_/___/_(_ __(___/_/___/_(___/_____/____|_____/___(___(_/___(___/_
+                                          /                /                    
+                                      (_ /             (_ / 
+"""
+    )
+
+    PrintDelayed(" Selamat datang di Kantong Ajaib Doremonangis.")
+    PrintDelayed(" Ketik 'login' untuk login.")
+    PrintDelayed('')
+
+def PrintHeader(title, delayed = False):
+    n = (60 - len(title) - 4) // 2
+
+    if n > 0:
+        header = f"\n {'=' * n} {title} {'=' * n}\n"
+    else:
+        header = '\n' + title + '\n'
+
+    if delayed:
+        PrintDelayed(header)
+    else:
+        print(header)
 
 def GetItemName(itemId, item):
     if item is not None:

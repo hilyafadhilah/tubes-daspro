@@ -1,6 +1,7 @@
 from modules.utils import ListFind, ListFindIndex, ListFilter
 
 _data = {}
+_user = None
 
 def InitStore(data):
     global _data
@@ -36,6 +37,16 @@ def UpdateOne(collection, entryId, value):
 
     return None
 
+def DeleteOne(collection, entryId):
+    global _data
+
+    index = ListFindIndex(_data[collection], match=lambda x, i, d: x['id'] == d, args=[entryId])
+
+    if index is not None:
+        return _data[collection].pop(index)
+
+    return None
+
 def InsertOne(collection, value, autoId = False):
     global _data
 
@@ -52,3 +63,11 @@ def NextInsertId(collection):
 def TakeData():
     global _data
     return _data
+
+def SetCurrentUser(user):
+    global _user
+    _user = user
+
+def GetCurrentUser():
+    global _user
+    return _user

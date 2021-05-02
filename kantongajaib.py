@@ -2,19 +2,18 @@ from modules.constants import collectionsSchema, routes
 from modules.args import ParseArgs, GetDirname
 from modules.load import LoadAll
 from modules.store import InitStore
-from modules.routing import MatchRoute
-from modules.view import ClearScreen
+from modules.routing import Enroute
+from modules.view import ClearScreen, Welcome
 
 ParseArgs()
 InitStore(LoadAll(collectionsSchema, dirname=GetDirname()))
 
 ClearScreen()
+#Welcome()
 
 while True:
     command = input('>>> ')
-    route = MatchRoute(routes, command)
+    cont = Enroute(routes, command)
 
-    if route is not None:
-        route['func']()
-        if command == "exit":
-            break
+    if cont is False:
+        break
