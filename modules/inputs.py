@@ -3,7 +3,7 @@ from modules.utils import StringToDate
 def Confirm(msg):
     while True:
         value = input(msg + ' (Y/N): ')
-        if (value in "Yy") or (value in "Nn"):
+        if (value in ['Y', 'y']) or (value in ['N', 'n']):
             break
     return value in 'Yy'
 

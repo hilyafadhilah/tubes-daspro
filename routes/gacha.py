@@ -5,61 +5,65 @@ from modules.view import Confirm, PrintNumbered, PrintHeader
 from modules.inputs import PromptLoop, InputDate, InputInt
 
 def GachaRoute():
-    shouldAdd = True
     consumables = GetCollection('consumable')
-    points = InitGachaPoints(consumables)
-    consumes = []
 
-    while shouldAdd:
-        PrintHeader('INVENTORY')
-        PrintNumbered(consumables, ShowEachConsumable)
-        print('')
+    if len(consumables) == 0:
+        print("Tidak ada consumable. Tidak dapat melakukan gacha.")
+    else:
+        points = InitGachaPoints(consumables)
+        consumes = []
 
-        idx = InputConsumableIndex(consumables)
-        qty = InputInt('Jumlah yang digunakan: ', min=1, max=consumables[idx]['jumlah'])
+        cont = True
+        while cont:
+            PrintHeader('INVENTORY')
+            PrintNumbered(consumables, ShowEachConsumable)
+            print('')
 
-        consumables[idx]['jumlah'] -= qty
-        consumes.append((idx, qty))
+            idx = InputConsumableIndex(consumables)
+            qty = InputInt('Jumlah yang digunakan: ', min=1, max=consumables[idx]['jumlah'])
 
-        print(f"{consumables[idx]['nama']} (x{qty}) ditambahkan!\n")
+            consumables[idx]['jumlah'] -= qty
+            consumes.append((idx, qty))
 
-        # boost
-        boost = CalculateItemBoost(points, consumables[idx], qty)
+            print(f"{consumables[idx]['nama']} (x{qty}) ditambahkan!\n")
 
-        PrintGachaPoints(points, boost)
-        points = AddBoost(points, boost)
+            # boost
+            boost = CalculateItemBoost(points, consumables[idx], qty)
 
-        if not Confirm('Tambahkan item lagi?'):
-            shouldAdd = False
-    
-    date = InputDate('Masukkan tanggal roll gacha: ')
+            PrintGachaPoints(points, boost)
+            points = AddBoost(points, boost)
 
-    PrintHeader('Rolling Gacha...')
-    result = RollGacha(points, consumables)
+            if not Confirm('Tambahkan item lagi?'):
+                cont = False
+        
+        date = InputDate('Masukkan tanggal roll gacha: ')
 
-    print(
-        f"Selamat, kamu mendapatkan {result['item']['nama']} " +
-        f"(Rarity {result['item']['rarity']}) (x{result['qty']})!"
-    )
+        PrintHeader('Rolling Gacha...')
+        result = RollGacha(points, consumables)
 
-    # Masukkan ke data
-    userId = GetCurrentUser()['id']
+        print(
+            f"Selamat, kamu mendapatkan {result['item']['nama']} " +
+            f"(Rarity {result['item']['rarity']}) (x{result['qty']})!"
+        )
 
-    for idx, qty in consumes:
-        UpdateOne('consumable', consumables[idx]['id'], {
-            'jumlah': consumables[idx]['jumlah']
+        # Masukkan ke data
+        userId = GetCurrentUser()['id']
+
+        for idx, qty in consumes:
+            UpdateOne('consumable', consumables[idx]['id'], {
+                'jumlah': consumables[idx]['jumlah']
+            })
+
+            InsertOne('consumable_history', autoId=True, value={
+                'id_pengambil': userId,
+                'id_consumable': consumables[idx]['id'],
+                'tanggal_pengambilan': date,
+                'jumlah': qty
+            })
+
+        UpdateOne('consumable', result['item']['id'], {
+            'jumlah': result['item']['jumlah'] + result['qty']
         })
-
-        InsertOne('consumable_history', autoId=True, value={
-            'id_pengambil': userId,
-            'id_consumable': consumables[idx]['id'],
-            'tanggal_pengambilan': date,
-            'jumlah': qty
-        })
-
-    UpdateOne('consumable', result['item']['id'], {
-        'jumlah': result['item']['jumlah'] + result['qty']
-    })
 
 def InputConsumableIndex(items):
     def IsValidConsumable(inp):

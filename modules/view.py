@@ -55,41 +55,48 @@ def GetItemName(itemId, item):
         return f"[Deleted Item {itemId}]"
 
 def PrintNumbered(entries, each = print, key = None):
-    maxSpace = len(str(len(entries)))
+    if len(entries) == 0:
+        print("Tidak ada entri.")
+    else:
+        maxSpace = len(str(len(entries)))
 
-    for i in range(len(entries)):
-        spacing = maxSpace - len(str(i + 1))
-        print(f"{' ' * spacing}{i + 1}. ", end='')
+        for i in range(len(entries)):
+            spacing = maxSpace - len(str(i + 1))
+            print(f"{' ' * spacing}{i + 1}. ", end='')
 
-        if callable(key):
-            each(key(entries[i]))
-        else:
-            each(entries[i])
+            if callable(key):
+                each(key(entries[i]))
+            else:
+                each(entries[i])
 
 def ShowEachEntry(entries, display = print, pageSize = 5):
     total = len(entries)
-    start = 0
-    count = pageSize if pageSize <= total else total
 
-    showNext = True
+    if total == 0:
+        print("Tidak ada entri.")
+    else:
+        start = 0
+        count = pageSize if pageSize <= total else total
 
-    while showNext:
-        print('')
+        showNext = True
 
-        for i in range(start, start + count):
-            display(i, entries[i])
+        while showNext:
+            print('')
 
-        if count == 1:
-            print(f"Menampilkan entri {start + 1} dari {total}.")
-        else:
-            print(f"Menampilkan entri {start + 1} - {start + count} dari {total}.")
+            for i in range(start, start + count):
+                display(i, entries[i])
 
-        start += count
+            if count == 1:
+                print(f"Menampilkan entri {start + 1} dari {total}.")
+            else:
+                print(f"Menampilkan entri {start + 1} - {start + count} dari {total}.")
 
-        if pageSize > (total - start):
-            count = total - start
+            start += count
 
-        if start >= total:
-            showNext = False
-        else:
-            showNext = Confirm(f"Tampilkan {count} entri selanjutnya?")
+            if pageSize > (total - start):
+                count = total - start
+
+            if start >= total:
+                showNext = False
+            else:
+                showNext = Confirm(f"Tampilkan {count} entri selanjutnya?")
