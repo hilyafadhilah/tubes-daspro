@@ -13,17 +13,28 @@ def MakeFolder(folder, path):
     os.makedirs(path + "\\" + folder)
 
 def RemakeFile(data, folder, path, schema):
-    data = DateToStringCsv(data)
-    for name in (data):
+    copy = DateToStringCsv(CopyData(data))
+    for name in copy:
         file = open(os.path.join(path, folder, name) + ".csv", 'w')
         fields = schema[name].keys()
         file.write(';'.join(fields))
         file.write('\n')
-        for row in data[name]:
+        for row in copy[name]:
             line = list(map(lambda f: str(row[f]), fields))
             file.write(';'. join(line))
-        file.write('\n')
+            file.write('\n')
         file.close()
+
+def CopyData(data):
+    copy = {}
+    for name in data:
+        copy[name] = []
+        for row in data[name]:
+            rowCopy = {}
+            for col in row:
+                rowCopy[col] = row[col]
+            copy[name].append(rowCopy)
+    return copy
 
 def DateToStringCsv(data):
     SchemaWithDate= ["consumable_history", "gadget_borrow_history", "gadget_return_history"]
