@@ -1,4 +1,5 @@
 from modules.store import FindBy, SetCurrentUser, InsertOne
+from modules.hash import hashing
 
 # ALGORITMA
 # Fungsi belum membuka menu utama
@@ -6,7 +7,7 @@ def LoginRoute():
     uname = input("Masukkan username: ")
     passwd = input("Masukkan password: ") 
 
-    user = FindBy('user', { 'username': uname, 'password': passwd })
+    user = FindBy('user', { 'username': uname, 'password': hashing(passwd) })
 
     # Bila Benar
     if len(user) > 0:
