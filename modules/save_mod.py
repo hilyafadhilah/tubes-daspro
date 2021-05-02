@@ -12,6 +12,7 @@ def MakeFolder(folder, path):
     os.makedirs(path + "\\" + folder)
 
 def RemakeFile(data, folder, path):
+    data = DateToStringCsv(data)
     for name in (data):
         file = open(os.path.join(path, folder, name) + ".csv", 'w')
         fields = collectionsSchema[name].keys()
@@ -22,3 +23,18 @@ def RemakeFile(data, folder, path):
         file.write(';'. join(line))
         file.write('\n')
         file.close()
+        
+def DateToStringCsv(data):
+    SchemaWithDate= ["consumable_history", "gadget_borrow_history", "gadget_return_history"]
+    for schema in SchemaWithDate:
+        if schema == "consumable_history":
+            atribut = "tanggal_pengambilan"
+        elif schema == "gadget_borrow_history":
+            atribut = "tanggal_peminjaman"
+        elif schema == "gadget_return_history":
+            atribut = "tanggal_pengembalian"
+        
+        for DataWithDate in data[schema]:
+            data[schema][DataWithDate['id']][atribut] = DateToString(DataWithDate[atribut])
+    
+    return data
