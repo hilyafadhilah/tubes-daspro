@@ -1,3 +1,6 @@
+# Nama      : TBIF1210-08-07
+# Tanggal   : 2021-05-03
+
 import os
 from modules.constants import collectionsSchema
 from modules.save_mod import FindFolder, MakeFolder, RemakeFile

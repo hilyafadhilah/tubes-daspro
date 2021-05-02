@@ -1,7 +1,26 @@
+# Nama      : TBIF1210-08-07
+# Tanggal   : 2021-05-03
+
+# Module modules/load
+#   Berisi subprogram untuk membaca data dari file dan
+#   mengkonversinya menjadi tipe yang bersesuaian
+
+# DEKLARASI SUBPROGRAM
 import os.path
 from modules.utils import SplitByChar, StringToDate
 
+# function LoadAll(schema : CollectionsSchema, dirname : string) --> CollectionsData
 def LoadAll(schema, dirname):
+    # Membaca seluruh file CSV dari direktori dirname berdasarkan schema
+    #   I.S. Masukan: skema data, nama direktori
+    #   F.S. Keluaran: seluruh data yg sudah dikonversi 
+
+    # KAMUS LOKAL
+    #   data : CollectionsData
+    #   colls : list of string
+    #   fname : string
+
+    # ALGORITMA SUBPROGRAM
     data = {}
 
     for collection in schema:
@@ -10,7 +29,22 @@ def LoadAll(schema, dirname):
 
     return data
 
+# function LoadCsv (filename : string) --> list of dict of string
 def LoadCsv(filename):
+    # Membaca data dari file CSV berseparator “;”
+    #   Mengembalikan hasilnya dalam array berisi dictionary
+    #   dengan key nama field dan value nilainya bertipe string.
+    #   I.S. Masukan: nama file CSV
+    #   F.S. Keluaran: data dari file CSV (masih bertipe string) 
+
+    # KAMUS LOKAL
+    #   data : list of dict of string
+    #   f : File
+    #   table : list of list of string
+    #   line : string
+    #   row : dict of string
+
+    # ALGORITMA SUBPROGRAM
     data = []
 
     if os.path.exists(filename):
@@ -31,7 +65,23 @@ def LoadCsv(filename):
     
     return data
 
+# function ConvertLoadedData of T (
+#   schema : CollectionSchema of T,
+#   data : list of dict of string
+# ) --> CollectionData of T
 def ConvertLoadedData(columnTypes, data):
+    # Mengkonversikan data hasil load menjadi tipe sesuai schema-nya.
+    #   I.S. Masukan: skema sebuah koleksi, data koleksi tersebut
+    #   F.S. Keluaran: data yang telah dikonversi berdasarkan schema 
+
+    # KAMUS LOKAL
+    #   result : CollectionData of T
+    #   fields : list of string
+    #   row : dict of any
+    #   typ : DataType
+    #   value : string
+
+    # ALGORITMA SUBPROGRAM
     result = []
 
     for raw in data:

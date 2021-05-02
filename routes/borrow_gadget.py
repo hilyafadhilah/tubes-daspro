@@ -1,8 +1,22 @@
+# Nama      : TBIF1210-08-07
+# Tanggal   : 2021-05-03
+
+# Module routes/borrow_gadget
+#   Berisi prosedur fitur peminjaman gadget
+
+# DEKLARASI SUBPROGRAM
 from modules.store import FindOne, FindBy, UpdateOne, InsertOne, GetCurrentUser
 from modules.inputs import PromptLoop, InputDate, InputInt
 
+# procedure BorrowGadgetRoute()
 def BorrowGadgetRoute():
-    userId = GetCurrentUser()['id'] # @TODO: get current user
+    # Rute peminjaman gadget
+    #   I.S. Masukan: ID gadget yang dipinjam, jumlah, tanggal
+    #   F.S. Data jumlah barang diupdate, riwayat peminjaman bertambah
+    #        Keluaran: pesan berhasil
+
+    # ALGORITMA SUBPROGRAM
+    userId = GetCurrentUser()['id']
 
     # 1. Input and validate Gadget ID
 
@@ -42,7 +56,7 @@ def IsGadgetBorrowable(gadgetId):
     # Check if item with ID gadgetId is borrowable:
     #   The item exists and is not in borrowed state by the user
 
-    userId = 1 # @TODO: get current user
+    userId = GetCurrentUser()['id']
     gadget = FindOne('gadget', gadgetId)
 
     if gadget is None:
@@ -55,7 +69,7 @@ def IsGadgetBorrowable(gadgetId):
         unreturned = FindBy('gadget_borrow_history', {
             'id_peminjam': userId,
             'id_gadget': gadgetId,
-            'is_returned': False
+            'is_returned': 'F'
         })
 
         if len(unreturned) > 0:
@@ -69,10 +83,10 @@ def PrintBorrowableError(gadgetId, bag):
     # Outputs error based on the return value of IsGadgetBorrowable
     if bag is None:
         print(f"Gadget dengan ID {gadgetId} tidak ditemukan.")
-    elif bag is False:
+    elif bag['jumlah'] == 0:
+        print(f"Stok item {bag['nama']} sudah habis!")
+    else:
         print(
             f"Kamu sedang meminjam {bag['nama']}.\n" +
             "Tidak bisa meminjam gadget yang sedang dipinjam."
         )
-    else:
-        print(f"Stok item {bag['nama']} sudah habis!")

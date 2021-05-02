@@ -1,4 +1,7 @@
-def hashing(msg):
+# Nama      : TBIF1210-08-07
+# Tanggal   : 2021-05-03
+
+def Hashing(msg):
     MsgList = list(msg)
     #Spasi dimasukkan sebagai karakter
     code = "qE1~ YMUR2\"`hNIdPzi%^t@(Ao:=CQ,nx4S[7mHFye#aT6+v)DfKL$r?bkOGB>}!9_wV']jcp5JZ&Xl|\\8sg<{3.u*W-0/"

@@ -1,8 +1,19 @@
+# Nama      : TBIF1210-08-07
+# Tanggal   : 2021-05-03
+
+# Module routes/history
+#   Rute menampilkan riwayat penggunaan item
+
+# DEKLARASI SUBPROGRAM
 from modules.store import GetCollection, FindOne
 from modules.view import ShowEachEntry, GetItemName
 from modules.utils import DateToString
 
+# procedure ShowHistoryList()
 def ShowHistoryList(collection, sortColumn, display):
+    #   I.S. -
+    #   F.S. Menampilkan riwayat penggunaan item dengan pagination
+    # ALGORITMA SUBPROGRAM
     histories = GetCollection(collection)
     histories.sort(key=lambda k: k[sortColumn], reverse=True)
     ShowEachEntry(histories, display=display)

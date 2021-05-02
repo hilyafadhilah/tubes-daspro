@@ -1,10 +1,24 @@
 from modules.store import GetCollection, FindOne, InsertOne, UpdateOne, GetCurrentUser
 from modules.utils import ListFilter
-from modules.gamble import Random, InitGachaPoints, CalculateItemBoost, AddBoost, RollGacha
+from modules.gamble import Random, InitGachaPoints, CalculateItemBoost, AddGachaPoints, RollGacha
 from modules.view import Confirm, PrintNumbered, PrintHeader
 from modules.inputs import PromptLoop, InputDate, InputInt
 
+# procedure GachaRoute()
 def GachaRoute():
+    # Melakukan peningkatan rarity consumable secara gambling
+    # 	I.S. Data awal consumable
+    # 	F.S. Consumable yang digunakan berkurang jumlahnya,
+    # 	     Consumable yang didapatkan bertambah jumlahnya,
+    # 	     Riwayat pengambilan consumable bertambah
+
+    # KAMUS LOKAL
+    # 	points, boost : GachaPoints
+    # 	consumes : list of < idx : integer, qty : integer >
+    # 	idx, qty : integer
+    # 	result : GachaResult
+
+    # ALGORITMA SUBPROGRAM
     consumables = GetCollection('consumable')
 
     if len(consumables) == 0:
@@ -28,14 +42,14 @@ def GachaRoute():
             print(f"{consumables[idx]['nama']} (x{qty}) ditambahkan!\n")
 
             # boost
-            boost = CalculateItemBoost(points, consumables[idx], qty)
+            boost = CalculateItemBoost(consumables[idx], qty)
 
             PrintGachaPoints(points, boost)
-            points = AddBoost(points, boost)
+            points = AddGachaPoints(points, boost)
 
             if not Confirm('Tambahkan item lagi?'):
                 cont = False
-        
+
         date = InputDate('Masukkan tanggal roll gacha: ')
 
         PrintHeader('Rolling Gacha...')
@@ -104,7 +118,7 @@ def ShowEachConsumable(consumable):
     )
 
 def PrintGachaPoints(pnts, boost = None):
-    cur = AddBoost(pnts, boost)
+    cur = AddGachaPoints(pnts, boost)
 
     print('Point gacha kamu:')
     for rarity in pnts:

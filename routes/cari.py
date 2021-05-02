@@ -1,3 +1,6 @@
+# Nama      : TBIF1210-08-07
+# Tanggal   : 2021-05-03
+
 from modules.store import FindBy, GetCollection
 from modules.utils import ListFilter
 from modules.view import PrintHeader, ShowEachEntry

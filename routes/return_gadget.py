@@ -1,8 +1,24 @@
+# Nama      : TBIF1210-08-07
+# Tanggal   : 2021-05-03
+
+# Module routes/return_gadget
+#   Rute pengembalian gadget
+
+# DEKLARASI SUBPROGRAM
 from modules.store import FindOne, FindBy, UpdateOne, InsertOne, GetCurrentUser
 from modules.inputs import PromptLoop, GetNumericValidator, InputInt, InputDate
 from modules.view import PrintNumbered, GetItemName
 
+# procedure ReturnGadgetRoute()
 def ReturnGadgetRoute():
+    # Rute pengembalian gadget
+    #   I.S. List barang dipinjam
+    #        Masukan: nomor peminjaman, jumlah, tanggal
+    #   F.S. Data jumlah barang diupdate, riwayat pengembalian ditambah,
+    #        riwayat peminjaman ditandai selesai jika semua dikembalikan
+    #        Keluaran: pesan berhasil 
+
+    # ALGORITMA SUBPROGRAM
     userId = GetCurrentUser()['id']
 
     # 1. Fetch list of unreturned items and display it

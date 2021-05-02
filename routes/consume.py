@@ -1,3 +1,6 @@
+# Nama      : TBIF1210-08-07
+# Tanggal   : 2021-05-03
+
 from modules.store import UpdateOne, InsertOne, FindOne, FindBy, GetCurrentUser
 from modules.inputs import PromptLoop, InputDate, InputInt
 
@@ -37,8 +40,6 @@ def RequestConsumableRoute():
     print(f"Item {consumable['nama']} (x{quantity}) telah berhasil diammbil.")
 
 def IsConsumableAvailable(consumableId):
-
-    userId = 1 # @TODO: get current user
     consumable = FindOne('consumable', consumableId)
 
     if consumable is None:

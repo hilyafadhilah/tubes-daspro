@@ -1,3 +1,79 @@
+# Nama      : TBIF1210-08-07
+# Tanggal   : 2021-05-03
+
+# Module modules/constants
+# Berisi konstanta general program
+
+# KAMUS UTAMA
+
+# TIPE DATA
+#   Tipe dari baris-baris di database
+
+# type UserData : <
+#   username : string;
+#   nama : string;
+#   alamat : string;
+#   password : string;
+#   role : “Admin” | “User”
+# >
+
+# type GadgetData : <
+#   id : string;
+#   nama : string;
+#   deskripsi : string;
+#   jumlah : integer;
+#   rarity : ‘C’ | ‘B’ | ‘A’ | ‘S’;
+#   tahun_ditemukan : integer
+# >
+
+# type ConsumableData : <
+#   id : string;
+#   nama : string;
+#   deskripsi : string;
+#   jumlah : integer;
+#   rarity : ‘C’ | ‘B’ | ‘A’ | ‘S’
+# >
+
+# type ConsumableHistoryData : <
+#   id : integer;
+#   id_pengambil : integer;
+#   id_consumable : string;
+#   tanggal_pengambilan : Datetime;
+#   jumlah : integer
+# >
+
+# type BorrowHistoryData : <
+#   id : integer;
+#   id_peminjam : integer;
+#   id_gadget : string;
+#   tanggal_peminjaman : Datetime;
+#   jumlah : integer;
+#   is_returned : integer
+# >
+
+# type ReturnHistoryData : <
+#   id : integer;
+#   id_peminjaman : integer;
+#   tanggal_pengembalian : Datetime;
+#   jumlah : integer
+# >
+
+# type EntryData :
+#   UserData | GadgetData | ConsumableData |
+#   ConsumableHistoryData | BorrowHistoryData | ReturnHistoryData
+
+# SKEMA DATA
+#   Pemetaan nama tabel dan tipe kolom database
+
+# type DataType : “string” | “int” | list of string
+# type FieldType : < FieldName : string; FieldType : DataType >
+# type CollectionsSchema : list of <
+#   CollectionName : string;
+#   Schema : list of FieldType
+# >
+
+# constant collectionsSchema : CollectionsSchema
+
 collectionsSchema = {
     'user': {
         'id': 'int',
@@ -47,12 +123,21 @@ collectionsSchema = {
 
 # GACHA
 
+# type GachaPoints : dict of integer
+# constant baseGachaPoints : GachaPoints
+#   Poin awal dari gacha
+
 baseGachaPoints = {
     'C': 80,
     'B': 50,
     'A': 25,
     'S': 10
 }
+
+# type GachaPointsBoost : dict of GachaPoints
+# constant pointsBoost : GachaPointsBoost
+#   Tambahan poin dari item terhadap poin gacha
+#   Key : Rarity item, Value : Tambahan poin untuk tiap point rarity
 
 pointsBoost = {
     'C': {

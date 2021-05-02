@@ -1,4 +1,19 @@
+# Nama      : TBIF1210-08-07
+# Tanggal   : 2021-05-03
+
+# Module routes/routes
+#   Berisi konstanta routesMapping untuk kebutuhan mapping command ke rute
+
+# KAMUS UTAMA
 from routes import user, cari, manage_item, history, return_gadget, borrow_gadget, change_stock, consume, save, exit, help, gacha
+
+# type RouteMapping : <
+#   cmd : string;
+#   func : Callable;
+#   roles : array [1..2] of “Admin” | “User”
+# >
+
+# constant routesMapping : list of RouteMapping 
 
 routesMapping = [
     {
