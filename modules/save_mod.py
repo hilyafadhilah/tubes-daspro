@@ -21,10 +21,10 @@ def RemakeFile(data, folder, path, schema):
         file.write('\n')
         for row in data[name]:
             line = list(map(lambda f: str(row[f]), fields))
-        file.write(';'. join(line))
+            file.write(';'. join(line))
         file.write('\n')
         file.close()
-        
+
 def DateToStringCsv(data):
     SchemaWithDate= ["consumable_history", "gadget_borrow_history", "gadget_return_history"]
     for schema in SchemaWithDate:
@@ -34,7 +34,7 @@ def DateToStringCsv(data):
             atribut = "tanggal_peminjaman"
         elif schema == "gadget_return_history":
             atribut = "tanggal_pengembalian"
-        
+
         for i in range(len(data[schema])):
             data[schema][i][atribut] = DateToString(data[schema][i][atribut])
     
