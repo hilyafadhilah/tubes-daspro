@@ -27,7 +27,7 @@ def ReturnGadgetRoute():
     PrintNumbered(borrows, each=ShowEachBorrow)
 
     if len(borrows) == 0:
-        print('Kamu tidak sedang meminjam barang apapun.')
+        print('Kamu tidak sedang meminjam item apapun.')
     else:
         # 2. Input and validate selected item
 
