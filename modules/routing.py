@@ -28,4 +28,4 @@ def Enroute(routes, cmd):
 
     print('')
 
-    return cmd.lower() == 'exit'
+    return cmd.lower() != 'exit'
