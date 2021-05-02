@@ -8,16 +8,12 @@ def InitStore(data):
     _data = data
 
 def GetCollection(name):
-    global _data
     return _data[name] if name in _data else None
 
 def FindOne(collection, entryId):
-    global _data
     return ListFind(_data[collection], match=lambda x, i, d: x['id'] == d, args=[entryId])
 
 def FindBy(collection, criteria):
-    global _data
-
     def IsMatch(entry, idx):
         for col in criteria:
             if entry[col] != criteria[col]:
@@ -57,11 +53,9 @@ def InsertOne(collection, value, autoId = False):
     return value['id']
 
 def NextInsertId(collection):
-    global _data
     return max(_data[collection], key=lambda x: x['id'])['id'] + 1
 
 def TakeData():
-    global _data
     return _data
 
 def SetCurrentUser(user):
@@ -69,5 +63,4 @@ def SetCurrentUser(user):
     _user = user
 
 def GetCurrentUser():
-    global _user
     return _user
