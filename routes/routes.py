@@ -79,7 +79,7 @@ routes = [
     {
         'cmd': 'exit',
         'func': exit.ExitRoute,
-        'roles': ['Admin']
+        'roles': []
     },
     {
         'cmd': 'gacha',
