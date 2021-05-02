@@ -12,7 +12,7 @@ def ReturnGadgetRoute():
 
     # 2. Input and validate selected item
 
-    idx = InputBorrowIndex(len(borrows))
+    idx = InputInt('Masukkan nomor peminjaman: ', min=1, max=len(borrows)) - 1
 
     # 3. Input and validate return qty and date
 
@@ -53,24 +53,6 @@ def ReturnGadgetRoute():
 
     name = GetItemName(borrow['id_gadget'], gadget)
     print(f"Item {name} (x{qty}) berhasil dikembalikan.")
-
-def InputBorrowIndex(count):
-    # Input and validate borrow index
-    _, inp = PromptLoop(
-        msg='Masukkan nomor peminjaman: ',
-        until=GetNumericValidator(min=1, max=count),
-        err=PrintIndexError,
-        bag=True
-    )
-
-    return inp - 1
-
-def PrintIndexError(inp, bag):
-    # Output error message when index input is invalid
-    if bag is None:
-        print('Bukan angka yang valid!')
-    else:
-        print(f'Nomor peminjaman {inp} tidak ada.')
 
 def GetUnreturnedQty(borrow):
     # Count the number of unreturned items for this particular borrowing
