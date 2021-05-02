@@ -12,12 +12,17 @@ def Enroute(routes, cmd):
     #else:
     #    print("Command tersebut tidak tersedia untuk kamu!")
 
-    if route is None:
-        print(f"Tidak ada command '{cmd}'. Ketik 'help' untuk bantuan.")
-    else:
-        PrintHeader(route['cmd'].upper())
-        route['func']()
+    if cmd != 'exit':
+        if route is None:
+            print(f"Tidak ada command '{cmd}'. Ketik 'help' untuk bantuan.")
+        else:
+            try:
+                PrintHeader(route['cmd'].upper())
+                route['func']()
+            except KeyboardInterrupt:
+                print(f'\n\nKeluar dari {cmd}.')
 
-    print('')
+        print('')
+        return True
 
-    return cmd != 'exit'
+    return False

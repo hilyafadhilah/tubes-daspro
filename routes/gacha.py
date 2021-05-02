@@ -44,7 +44,7 @@ def GachaRoute():
     )
 
     # Masukkan ke data
-    userId = GetCurrentUser().id
+    userId = GetCurrentUser()['id']
 
     for idx, qty in consumes:
         UpdateOne('consumable', consumables[idx]['id'], {

@@ -12,7 +12,7 @@ def PrintDelayed(*args):
     sleep(1)
     print(*args)
 
-def Welcome():
+def PrintBanner():
     PrintDelayed(
 """
 ________________________________________________________________________________
@@ -26,9 +26,14 @@ _/____\___(___(_/___/_(_ __(___/_/___/_(___/_____/____|_____/___(___(_/___(___/_
 """
     )
 
+def Welcome():
+    PrintBanner()
     PrintDelayed(" Selamat datang di Kantong Ajaib Doremonangis.")
-    PrintDelayed(" Ketik 'login' untuk login.")
-    PrintDelayed('')
+    PrintDelayed(" Masukkan command. Ketik 'help' untuk bantuan.\n")
+
+def Goodbye():
+    print("\n Selamat Tinggal!")
+    PrintBanner()
 
 def PrintHeader(title, delayed = False):
     n = (60 - len(title) - 4) // 2
