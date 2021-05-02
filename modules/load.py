@@ -16,9 +16,10 @@ def LoadCsv(filename):
     if os.path.exists(filename):
         table = []
 
-        with open(filename) as f:
-            for line in f:
-                table.append(SplitByChar(line.strip(), ';'))
+        f = open(filename, 'r')
+        for line in f:
+            table.append(SplitByChar(line.rstrip(), ';'))
+        f.close()
 
         cols = table[0]
 
@@ -35,8 +36,10 @@ def ConvertLoadedData(columnTypes, data):
 
     for raw in data:
         row = {}
-        for col in raw:
-            if col in columnTypes:
+        for col in columnTypes:
+            if col not in raw:
+                row[col] = None
+            else:
                 if columnTypes[col] == 'int':
                     row[col] = int(raw[col])
                 elif columnTypes[col] == 'float':
@@ -46,11 +49,6 @@ def ConvertLoadedData(columnTypes, data):
                 elif type(columnTypes[col]) == list:
                     if raw[col] in columnTypes[col]:
                         row[col] = raw[col]
-                    else:
-                        row[col] = None
-                elif type(columnTypes[col]) == dict:
-                    if raw[col] in columnTypes[col]:
-                        row[col] = columnTypes[col][raw[col]]
                     else:
                         row[col] = None
                 else:

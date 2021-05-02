@@ -8,7 +8,7 @@ def InitStore(data):
 
 def GetCollection(name):
     global _data
-    return _data[name]
+    return _data[name] if name in _data else None
 
 def FindOne(collection, entryId):
     global _data

@@ -7,7 +7,7 @@ def ReturnGadgetRoute():
 
     # 1. Fetch list of unreturned items and display it
 
-    borrows = FindBy('gadget_borrow_history', { 'id_peminjam': userId, 'is_returned': False })
+    borrows = FindBy('gadget_borrow_history', { 'id_peminjam': userId, 'is_returned': 'F' })
     PrintNumbered(borrows, each=ShowEachBorrow)
 
     # 2. Input and validate selected item
@@ -32,7 +32,7 @@ def ReturnGadgetRoute():
 
     if qty == maxReturnQty:
         # Return all, this item is no longer in borrowed state by the user
-        UpdateOne('gadget_borrow_history', borrow['id'], { 'is_returned': True })
+        UpdateOne('gadget_borrow_history', borrow['id'], { 'is_returned': 'T' })
 
     gadget = FindOne('gadget', borrow['id_gadget'])
 
@@ -40,11 +40,11 @@ def ReturnGadgetRoute():
         UpdateOne('gadget', borrow['id_gadget'], { 'jumlah': gadget['jumlah'] + qty })
     else:
         # A deleted item is being returned
-        InsertOne('gadget', value={
+        InsertOne('gadget', {
             'id': borrow['id_gadget'],
-            'jumlah': qty,
             'nama': None,
             'deskripsi': None,
+            'jumlah': qty,
             'rarity': None,
             'tahun_ditemukan': None
         })

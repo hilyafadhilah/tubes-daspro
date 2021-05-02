@@ -2,7 +2,7 @@ import os
 from modules.save_mod import FindFolder, MakeFolder, RemakeFile
 from modules.store import TakeData
 
-def Save():
+def SaveRoute():
     save_folder = input("Masukkan nama folder penyimpanan : ")
     Path = os.getcwd()
     print("\nSaving...")

@@ -1,5 +1,5 @@
 from modules.store import UpdateOne, InsertOne, FindOne, FindBy
-from modules.input import PromptLoop, InputDate, InputQty
+from modules.inputs import PromptLoop, InputDate, InputQty
 
 def RequestConsumableRoute():
     userId = int(input()) # Belum ada fungsi untuk menentukan user/admin

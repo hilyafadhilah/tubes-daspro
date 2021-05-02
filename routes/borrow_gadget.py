@@ -31,7 +31,7 @@ def BorrowGadgetRoute():
         'id_gadget': gadgetId,
         'tanggal_peminjaman': date,
         'jumlah': qty,
-        'is_returned': False
+        'is_returned': 'F'
     })
 
     # 5. Success
@@ -48,6 +48,8 @@ def IsGadgetBorrowable(gadgetId):
     if gadget is None:
         # Gadget not found
         return False, None
+    elif gadget['jumlah'] == 0:
+        return 0, gadget
     else:
         # Check if there's unreturned items
         unreturned = FindBy('gadget_borrow_history', {
@@ -67,8 +69,10 @@ def PrintBorrowableError(gadgetId, bag):
     # Outputs error based on the return value of IsGadgetBorrowable
     if bag is None:
         print(f"Gadget dengan ID {gadgetId} tidak ditemukan.")
-    else:
+    elif bag is False:
         print(
             f"Kamu sedang meminjam {bag['nama']}.\n" +
             "Tidak bisa meminjam gadget yang sedang dipinjam."
         )
+    else:
+        print(f"Stok item {bag['nama']} sudah habis!")

@@ -1,4 +1,4 @@
-from routes import history, return_gadget, borrow_gadget, change_stock, consume save, exit, help
+from routes import history, return_gadget, borrow_gadget, change_stock, consume, save, exit, help
 
 routes = [
     {
@@ -90,10 +90,7 @@ collectionsSchema = {
         'id_gadget': 'string',
         'tanggal_peminjaman': 'date',
         'jumlah': 'int',
-        'is_returned': {
-            'T': True,
-            'F': False
-        }
+        'is_returned': ['T', 'F']
     },
     'gadget_return_history': {
         'id': 'int',
