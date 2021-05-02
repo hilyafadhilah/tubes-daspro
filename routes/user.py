@@ -36,3 +36,5 @@ def RegisterRoute():
         'role': 'User'
         },autoId=True)
         print(f"User {username} telah berhasil didaftarkan ke Kantong Ajaib.")
+    else:
+        print(f"Username {username} telah terdaftar.")
