@@ -6,20 +6,20 @@ from modules.routing import Enroute
 from modules.view import ClearScreen, Welcome, Goodbye
 from routes.routes import routes
 
-ParseArgs()
-InitStore(LoadAll(collectionsSchema, dirname=GetDirname()))
+try:
+    ParseArgs()
+    InitStore(LoadAll(collectionsSchema, dirname=GetDirname()))
 
-ClearScreen()
-Welcome()
+    ClearScreen()
+    Welcome()
 
-while True:
-    try:
-        command = input('>>> ')
-        cont = Enroute(routes, command)
+    while True:
+            command = input('>>> ')
+            cont = Enroute(routes, command)
 
-        if cont is False:
-            Goodbye()
-            break
-    except KeyboardInterrupt:
-        print('\n\n Keluar dari program.')
-        break
+            if cont is False:
+                Goodbye()
+                break
+except KeyboardInterrupt:
+    print('\n\n Keluar dari program.')
+    exit()

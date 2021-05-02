@@ -1,4 +1,4 @@
-from modules.store import FindBy, SetCurrentUser
+from modules.store import FindBy, SetCurrentUser, InsertOne
 
 # ALGORITMA
 # Fungsi belum membuka menu utama
@@ -9,13 +9,13 @@ def LoginRoute():
     user = FindBy('user', { 'username': uname, 'password': passwd })
 
     # Bila Benar
-    if user is not None:
+    if len(user) > 0:
         #file penyimpanan username dipanggil untuk membandingkan username
         print("Halo "+str(uname)+"! Selamat datang di kantong Ajaib.")
         SetCurrentUser(user[0])
     else:
         #Bila Username dan Password tidak benar
-        print("")
+        print("Gagal login.")
 
 #ALGORITMA
 def RegisterRoute():

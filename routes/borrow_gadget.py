@@ -1,8 +1,8 @@
-from modules.store import FindOne, FindBy, UpdateOne, InsertOne
+from modules.store import FindOne, FindBy, UpdateOne, InsertOne, GetCurrentUser
 from modules.inputs import PromptLoop, InputDate, InputInt
 
 def BorrowGadgetRoute():
-    userId = 1 # @TODO: get current user
+    userId = GetCurrentUser()['id'] # @TODO: get current user
 
     # 1. Input and validate Gadget ID
 

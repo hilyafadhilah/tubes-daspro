@@ -3,7 +3,6 @@ from modules.utils import ListFilter
 from modules.gamble import Random, InitGachaPoints, CalculateItemBoost, AddBoost, RollGacha
 from modules.view import Confirm, PrintNumbered, PrintHeader
 from modules.inputs import PromptLoop, InputDate, InputInt
-import math
 
 def GachaRoute():
     shouldAdd = True
@@ -59,7 +58,7 @@ def GachaRoute():
         })
 
     UpdateOne('consumable', result['item']['id'], {
-        'jumlah': consumables[idx]['jumlah'] + qty
+        'jumlah': result['item']['jumlah'] + result['qty']
     })
 
 def InputConsumableIndex(items):

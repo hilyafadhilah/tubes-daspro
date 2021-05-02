@@ -19,15 +19,15 @@ def CariTahunRoute():
     #Misalkan pencarian tahun sebagai berikut
     #Belum dilakukan pengecekan masing masing file
     if (kategori == "="):#gadget terbit pada tahun
-        match=lambda x: x['tahun_ditemukan']== tahun
+        match=lambda x, i: x['tahun_ditemukan']== tahun
     elif (kategori == ">"):#gadget terbit setelah tahun
-        match=lambda x: x['tahun_ditemukan'] > tahun
+        match=lambda x, i: x['tahun_ditemukan'] > tahun
     elif (kategori == "<"):#gadget terbit sebelum tahun
-        match=lambda x: x['tahun_ditemukan'] < tahun
+        match=lambda x, i: x['tahun_ditemukan'] < tahun
     elif (kategori == ">="):#gadget terbit setelah pada tahun
-        match=lambda x: x['tahun_ditemukan'] >= tahun
+        match=lambda x, i: x['tahun_ditemukan'] >= tahun
     elif (kategori == "<="):#gadget terbit sebelum pada tahun
-        match=lambda x: x['tahun_ditemukan'] <= tahun
+        match=lambda x, i: x['tahun_ditemukan'] <= tahun
     else:
         match=None
 

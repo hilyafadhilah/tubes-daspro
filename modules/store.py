@@ -8,7 +8,7 @@ def InitStore(data):
     _data = data
 
 def GetCollection(name):
-    return _data[name] if name in _data else None
+    return _data[name][:] if name in _data else None
 
 def FindOne(collection, entryId):
     return ListFind(_data[collection], match=lambda x, i, d: x['id'] == d, args=[entryId])

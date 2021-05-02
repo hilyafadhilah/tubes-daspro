@@ -60,7 +60,7 @@ def ShowReturnHistory(idx, history):
     borrow = FindOne('gadget_borrow_history', history['id_peminjaman'])
     user = FindOne('user', borrow['id_peminjam'])
     gadget = FindOne('gadget', borrow['id_gadget'])
-    itemName = GetItemName(history['id_gadget'], gadget)
+    itemName = GetItemName(borrow['id_gadget'], gadget)
 
     print(
         f"[{idx + 1}]\n" +

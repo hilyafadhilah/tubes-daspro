@@ -1,9 +1,9 @@
-from modules.store import FindOne, FindBy, UpdateOne, InsertOne
+from modules.store import FindOne, FindBy, UpdateOne, InsertOne, GetCurrentUser
 from modules.inputs import PromptLoop, GetNumericValidator, InputInt, InputDate
 from modules.view import PrintNumbered, GetItemName
 
 def ReturnGadgetRoute():
-    userId = 1 # @TODO: get current user
+    userId = GetCurrentUser()['id']
 
     # 1. Fetch list of unreturned items and display it
 
@@ -35,6 +35,7 @@ def ReturnGadgetRoute():
         UpdateOne('gadget_borrow_history', borrow['id'], { 'is_returned': 'T' })
 
     gadget = FindOne('gadget', borrow['id_gadget'])
+    name = GetItemName(borrow['id_gadget'], gadget)
 
     if gadget is not None:
         UpdateOne('gadget', borrow['id_gadget'], { 'jumlah': gadget['jumlah'] + qty })
@@ -42,7 +43,7 @@ def ReturnGadgetRoute():
         # A deleted item is being returned
         InsertOne('gadget', {
             'id': borrow['id_gadget'],
-            'nama': None,
+            'nama': name,
             'deskripsi': None,
             'jumlah': qty,
             'rarity': None,
@@ -51,7 +52,6 @@ def ReturnGadgetRoute():
 
     # 5. Success
 
-    name = GetItemName(borrow['id_gadget'], gadget)
     print(f"Item {name} (x{qty}) berhasil dikembalikan.")
 
 def GetUnreturnedQty(borrow):
